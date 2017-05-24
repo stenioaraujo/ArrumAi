@@ -1,0 +1,113 @@
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pagamento<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></h5>
+      </div>
+      <div class="modal-body">
+        <div class="card-option" ng-click="selectedCard='visa'"> <img alt="visa" src="/static/images/visa.png"> &nbsp;&nbsp; **** **** **** 8200&nbsp;&nbsp;
+          <spam ng-if="selectedCard==='visa'" class="glyphicon glyphicon-ok"></spam>
+        </div>
+        <div class="card-option" ng-click="selectedCard='master-card'"> <img alt="master-card" src="/static/images/master-card.png" class="card-option"> &nbsp;&nbsp; **** **** **** 3563&nbsp;&nbsp;
+          <spam ng-if="selectedCard==='master-card'" class="glyphicon glyphicon-ok"></spam>
+        </div>
+        <br>
+        <br>
+        <a class="cat-item" style="color:#1bbaaf;"><i class="fa fa-angle-right"></i>&nbsp; Adicionar forma de pagamento</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="alugar(itemDetail, data)" >Alugar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="termosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Termos e condições<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></h5>
+      </div>
+      <div class="modal-body">
+        Eu quero alugar a roupa.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Alert box -->
+<div class="successmes animate-show-hide" ng-show="showAlert" style="margin-top:10px;position:fixed;z-index:9999;width:100%">
+  <div class="message-box-wrap"> <i class="fa fa-check-square fa-lg"></i>
+  <button type="button" class="close" ng-click="showAlert=false" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Successo!</strong> Sua requisição foi enviada! Em até 3 dias você receberá um e-mail com o resultado da sua requisição.</div>
+</div>
+<div class="margin-bottom"></div>
+
+<div class="product-view-area">
+  <div class="product-name">
+    <h1 style="margin-left:30px;margin-top:8px" >{{ item.name }}</h1>
+  </div>
+  <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
+    <div class="large-image" style="margin-left:30px"> <a href="/static/images/products/img01.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" ng-src="{{ item.image_url }}" alt="products"> </a> </div>
+  </div>
+  <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7">
+    <div class="product-details-area">
+      <div class="price-box">
+        <p class="special-price"> <span class="price-label">Preço</span> <span class="price"> R${{ item.price }}</span> </p>
+      </div>
+      <div class="row">
+        <div class="ratings">
+          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+          <p class="rating-links"> 1 Review(s)
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="short-description">
+            <h2>Descrição do Produto</h2>
+            <p>{{ item.description }}
+
+          </div>
+          <div class="product-color-size-area">
+            <div class="size-area">
+              <h2 class="saider-bar-title">Tamanho</h2>
+                {{ item.size }}
+            </div>
+          </div>
+          <div class="product-color-size-area">
+            <div class="size-area">
+              <h2 class="saider-bar-title">Categoria</h2>
+                {{ item.category }}
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6" style="height:100;padding:10px;">
+          <map items="[item]"></map>
+        </div>
+      </div>
+      <div class="row">
+        <form>
+          <div class="block-content" style="padding-bottom:20px">
+            <ul class="check-box-list">
+              <li>
+                &nbsp; <input type="checkbox" id="p1" name="cc" ng-model="termosAceitos"/>
+                <label for="p1"> <span class="button"></span>Eu Li e aceito os <u data-toggle="modal" data-target="#termosModal">Termos e Condições</u></label>
+              </li>
+            </ul>
+          </div>
+          <datepicker dt="data.data"></datepicker>
+          <div>
+            <button class="button pro-add-to-cart" title="Requisitar Aluguel" ng-disabled="!termosAceitos" type="button" data-toggle="modal" data-target="#myModal"><span><i class="fa fa-shopping-cart"></i>Requisitar Aluguel</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

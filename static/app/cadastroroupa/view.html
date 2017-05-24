@@ -1,0 +1,110 @@
+<!-- Modal de medidas-->
+<div class="modal fade" id="medidasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Medidas<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></h5>
+      </div>
+      <div class="modal-body">
+				<table class="table tabe-striped" style="margin-top:5px">
+					<thead>
+						<tr>
+							<th>Tamanho(cm)</th>
+							<th>Altura(cm)</th>
+							<th>Busto(cm)</th>
+							<th>Cintura(cm)</th>
+							<th>Quadril(cm)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>PP</th><td>158-163</td><td>82-84</td><td>60-65</td><td>84-88</td>
+						</tr>
+						<tr>
+							<th>P</th><td>163-168</td><td>84-88</td><td>65-75</td><td>88-92</td>
+						</tr>
+						<tr>
+							<th>M</th><td>168-173</td><td>88-92</td><td>70-75</td><td>92-96</td>
+						</tr>
+						<tr>
+							<th>G</th><td>173-178</td><td>92-96</td><td>75-80</td><td>96-100</td>
+						</tr>
+						<tr>
+							<th>GG</th><td>178-183</td><td>96-100</td><td>80-85</td><td>100-104</td>
+						</tr>
+					</tbody>
+				</table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Container -->
+<section class="main-container col1-layout">
+	<div class="main container">
+		<div class="account-login">
+			<div class="page-title">
+				<h2>Cadastrar Peça</h2>
+			</div>
+			<div class="page-content">
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-3">
+						<div class="box-authentication">
+              <form action="/items" method=post enctype="multipart/form-data">
+  							<h3>Nova Peça</h3>
+  							<label>Nome</label>
+  							<input type="text" name="name" class="form-control" style="width:100%">
+  							<label>Descrição</label>
+  							<textarea class="form-control" name="description" rows="3" style="width:100%"></textarea>
+                <div class=row>
+                  <div class="col-xs-6">
+      							<label>Preço</label>
+      							<input  type="number" name="price" class="form-control">
+      							<label>Categoria</label>
+      							<br>
+      							<select name="category" class="cate-dropdown hidden-xs form-control">
+      								<option>Vestido</option>
+      								<option>Paletó</option>
+      								<option>Calça</option>
+      							</select> <br>
+      							<br>
+      							<label> Tamanho </label> <br>
+      							<label class="radio-inline" ng-repeat="tamanho in tamanhos">
+      								<input type="radio" class="form-control" name="size" value="{{tamanho.valor}}"> {{tamanho.valor}}
+      							</label>
+      							<br>
+      								<p style="color:#ff3366" onmouseover="this.style.textDecoration='underline';"
+          							onmouseout="this.style.textDecoration='none';" data-toggle="modal"
+      									data-target="#medidasModal">Tabela de Medidas</p>
+      							<label>Foto(JPEG, JPG, PNG)</label> <br>
+      							<input type="file" name="file" accept="image/*">
+      							<br><br>
+                  </div>
+                </div>
+
+                <div class="col-xs-6">
+                  <label>Localização</label> <br>
+                  <div id="map" style="height: 200px;width: 100%;margin-bottom:10px" ng-init="initMap()"></div>
+                  <input type="hidden" name="coords" value={{coords}}>
+                </div>
+
+              <!-- Esse 'item' que tem os atributos no ng-model corresponde aos itens que tem no controller do Home -->
+              <input type="hidden" name="owner" value=1>
+              <div class=row>
+                <button type="submit" class="button" style="text-align:left" ng-click="adicionarItem(item)"><i class="fa fa-plus"></i>&nbsp; <span>Adicionar</span></button>
+              </div>
+            </form>
+            </div>
+            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+</section>

@@ -1,0 +1,83 @@
+<div ng-controller="requestsController" class="container-fluid display-table">
+
+  <!-- Pedidos de Aluguel -->
+  <div class=row>
+    <div class="col-main col-sm-9">
+      <div class="page-title" style="margin-left:50px">
+        <h2>Pedidos de aluguel</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class=row style="margin-left:50px" ng-show="user.requests.length == 0">
+    <div class="col-main col-sm-9">
+        <h4>Você não possui pedidos pendentes.</h4>
+    </div>
+  </div>
+  <div class="product-list-area" style="min-height:100px;margin-left:50px">
+    <ul class="products-list" id="products-list">
+      <li class="item wow fadeInUp" ng-repeat="request in requests| filter:{status: 0} ">
+        <div class="col-sm-8 col-lg-8 col-md-8">
+          <div class="product-shop">
+            <h2 class="product-name"><a ng-click="redirecionaPaginaProduto(request.item)" title="Nome do Item">{{request.item.name}}</a></h2>
+            <div class="desc std">
+              <p>{{request.item.description}} <a ng-click="redirecionaPaginaProduto(request.item)" class="link-learn" title="Learn More">Visualizar Produto</a> </p>
+            </div>
+            <p> Alugar em: {{request.date}} </p>
+            <div class="actions">
+              <button class="button cart-button" title="Aceitar" type="button" ng-click="aceitarRequest(request)"><i class="fa fa-check"></i><span>Aceitar</span></button>
+              <button class="button cart-button" title="Rejeitar" type="button" ng-click="rejeitarRequest(request)" style="background-color:black"><i class="fa fa-close"></i><span>Rejeitar</span></button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Pedidos Aceitos -->
+  <div class=row>
+    <div class="col-main col-sm-9">
+      <div class="page-title" style="margin-left:50px">
+        <h2>Pedidos Aceitos</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class=row ng-show="requestsAceitos.length == 0">
+    <div class="col-main col-sm-9">
+        <h4 style="margin-left:50px" >Você não possui Alugueis Recentes.</h4>
+    </div>
+  </div>
+  <div class="product-list-area" style="min-height:100px;margin-left:50px">
+    <ul class="products-list" id="products-list">
+      <li class="item wow fadeInUp" ng-repeat="request in requests | filter:{status: 1} ">
+        <div class="col-sm-8 col-lg-8 col-md-8">
+          <div class="product-shop">
+            <h2 class="product-name"><a ng-click="redirecionaPaginaProduto(item)" title="Nome do Item">{{request.item.name}}</a></h2>
+            <div class="desc std">
+              <p>{{request.item.description}} <a ng-click="redirecionaPaginaProduto(item)" class="link-learn" title="Learn More">Visualizar Produto</a> </p>
+            </div>
+            <p> Alugado em: {{request.date}} para <b style="color:#ff3366" onmouseover="this.style.textDecoration='underline';"
+              onmouseout="this.style.textDecoration='none';" data-toggle="modal"
+              data-target="#usuarioModal">{{user.name}} </b></p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Modal de informação do usuario que está alugando-->
+  <div class="modal fade" id="usuarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Informações do requisitante<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></h5>
+        </div>
+        <div class="modal-body">
+          <p>Nome: {{user.name}} </p>
+          <p>E-mail: {{user.email}} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

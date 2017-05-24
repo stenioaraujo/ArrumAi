@@ -1,0 +1,155 @@
+<div ng-controller="homeController" class="container-fluid display-table">
+<!-- Main Container -->
+
+<div class="main-container col2-right-layout">
+  <div class="container">
+    <div class="row">
+      <div class="page-title">
+        <h2>Buscar Roupas</h2>
+      </div>
+      <div class="col-main col-sm-9">
+        <!-- GRID Principal -->
+        <div class="product-grid-area">
+          <ul class="products-grid">
+            <li ng-repeat="item in isInPriceRange() | filter:{size: size} | filter:{category: category}" class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 wow fadeInUp">
+              <div class="product-item">
+                <div class="item-inner" ng-click="redirecionaPaginaProduto(item)">
+                  <div class="product-thumbnail">
+                    <div class="pr-img-area" style="height:400px">
+                      <figure> <img class="first-img" ng-src="{{ item.image_url }}" alt=""></figure>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <div class="info-inner">
+                      <div class="item-title"> <a title="Ipsums Dolors Untra"> {{ item.name }} </a> </div>
+                      <div class="item-content">
+                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                        <div class="item-price">
+                          <div class="price-box"> <span class="regular-price"> <span class="price">R${{ item.price }}</span> </span> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="pagination-area wow fadeInUp">
+          <ul>
+            <li><a class="active">1</a></li>
+            <li><a ng-disabled="true">2</a></li>
+            <li><a ng-disabled="true">3</a></li>
+            <li><a ng-disabled="true"><i class="fa fa-angle-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <aside class="right sidebar col-sm-3 col-xs-12">
+        <div class="category-sidebar">
+          <div class="sidebar-title">
+            <h3>Mapa</h3>
+          </div>
+          <map items="items"></map>
+        </div>
+        <div class="category-sidebar">
+          <div class="sidebar-title">
+            <h3>Categorias</h3>
+          </div>
+          <ul class="product-categories">
+            <li class="cat-item cat-parent">Feminino
+              <ul class="children">
+                  <ul class="children">
+                    <div ng-if="category === 'vestido'">
+                      <li  class="cat-item" style="color:#1bbaaf;" ng-click=setCategoriaVestido("vestido")><i class="fa fa-angle-right"></i>&nbsp; Vestidos</li>
+                    </div>
+                    <div ng-if="category !== 'vestido'">
+                      <li  class="cat-item" ng-click=setCategoriaVestido("vestido")><i class="fa fa-angle-right"></i>&nbsp; Vestidos</li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="cat-item cat-parent">Masculino
+              <ul class="children">
+                <div ng-if="category === 'paleto'">
+                  <li class="cat-item" style="color:#1bbaaf;" ng-click=setCategoriaVestido("Palet\u00f3")><i class="fa fa-angle-right"></i>&nbsp; Paletó</li>
+                </div>
+                <div ng-if="category !== 'paleto'">
+                  <li class="cat-item" ng-click=setCategoriaVestido("Palet\u00f3")><i class="fa fa-angle-right"></i>&nbsp; Paletó</li>
+                </div>
+                <div ng-if="category === 'calca'">
+                  <li class="cat-item" style="color:#1bbaaf;" ng-click=setCategoriaVestido("calca")><i class="fa fa-angle-right"></i>&nbsp; Calça</li>
+                </div>
+                <div ng-if="category !== 'calca'">
+                  <li class="cat-item" ng-click=setCategoriaVestido("calca")><i class="fa fa-angle-right"></i>&nbsp; Calça</li>
+                </div>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="product-price-range wow fadeInUp">
+          <div class="sidebar-bar-title">
+            <h3>Preço</h3>
+          </div>
+          <div class="block-content">
+            <ul class="check-box-list">
+              <li>
+                <input type="checkbox" id="p1" name="cc" ng-model="checkbox.range1"/>
+                <label for="p1"> <span class="button"></span> R$0 - R$50 </label>
+              </li>
+              <li>
+                <input type="checkbox" id="p2" name="cc" ng-model="checkbox.range2"/>
+                <label for="p2"> <span class="button"></span> R$50 - R$100</label>
+              </li>
+              <li>
+                <input type="checkbox" id="p3" name="cc" ng-model="checkbox.range3"/>
+                <label for="p3"> <span class="button"></span> R$100 - R$250</label>
+              </li>
+              <li>
+                <input type="checkbox" id="p4" name="cc" ng-model="checkbox.range4"/>
+                <label for="p4"> <span class="button"></span> R$250+</label>
+              </li>
+          </div>
+        </div>
+        <div class="shop-by-side wow fadeInUp">
+          <div class="sidebar-bar-title">
+            <h3>Tamanho</h3>
+          </div>
+          <div class="block-content">
+            <div class="size-area">
+              <div class="size">
+                <ul>
+                  <div ng-if="size === 'P'">
+                    <li style="border: 2px solid #ff3366;" ng-click=setTamanho("P")><a href="">&nbsp;P</a></li>
+                  </div>
+                  <div ng-if="size !== 'P'">
+                    <li ng-click=setTamanho("P")><a href="">&nbsp;P</a></li>
+                  </div>
+                  <div ng-if="size === 'M'">
+                    <li style="border: 2px solid #ff3366;" ng-click=setTamanho("M")><a href="">&nbsp;M</a></li>
+                  </div>
+                  <div ng-if="size !== 'M'">
+                    <li ng-click=setTamanho("M")><a href="">&nbsp;M</a></li>
+                  </div>
+                  <div ng-if="size === 'G'">
+                    <li style="border: 2px solid #ff3366;" ng-click=setTamanho("G")><a href="">&nbsp;G</a></li>
+                  </div>
+                  <div ng-if="size !== 'G'">
+                    <li ng-click=setTamanho("G")><a href="">&nbsp;G</a></li>
+                  </div>
+                  <div ng-if="size === 'GG'">
+                    <li style="border: 2px solid #ff3366;" ng-click=setTamanho("GG")><a href="">&nbsp;GG</a></li>
+                  </div>
+                  <div ng-if="size !== 'GG'">
+                    <li ng-click=setTamanho("GG")><a href="">&nbsp;GG</a></li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</div>
