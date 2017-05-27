@@ -10,9 +10,10 @@ from random import randint
 
 template_dir = os.path.abspath('static')
 app = Flask(__name__, template_folder=template_dir) # create the application instance :)
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(os.environ.get('APP_SETTINGS'))
 # DB Configurations and declaration
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'  
 
 # Order matters: Initialize SQLAlchemy before Marshmallow
 db = SQLAlchemy(app)
