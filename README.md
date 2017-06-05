@@ -4,13 +4,16 @@
 # Setup Environment
 Create an virtual environment to hold the packages.
 
-    virtualenv ~/venv_arrumai
+
+    virtualenv ~/venv_arrumai
 
 Activate the virtual environment
 
-    source ~/venv_arrumai/bin/activate
+
+    source ~/venv_arrumai/bin/activate
 
 Install all the necessary packages
+
 
     pip install -r requirements.txt
 
